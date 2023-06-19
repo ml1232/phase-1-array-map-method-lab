@@ -12,5 +12,29 @@ const tutorials = [
 ];
 
 const titleCased = () => {
-  return tutorials
-}
+  return tutorials.map((tutorial) => {
+    const words = tutorial.split(' ');
+    const capitalizedWords = words.map((word) => {
+      if (word.toUpperCase() === 'NaN') {
+        // Preserve "NaN" acronym
+        return word;
+      } else if (word === word.toUpperCase()) {
+        // Preserve the case of other acronyms
+        return word;
+      } else {
+        return word.replace(/\b\w/g, (char) => char.toUpperCase());
+      }
+    });
+    const modifiedWords = capitalizedWords.map((word) => {
+      if (word.toLowerCase() === 'preventdefault') {
+        return 'PreventDefault';
+      } else if (word.toLowerCase() === 'stoppropagation') {
+        return 'StopPropagation';
+      } else {
+        return word;
+      }
+    });
+    return modifiedWords.join(' ');
+  });
+};
+
